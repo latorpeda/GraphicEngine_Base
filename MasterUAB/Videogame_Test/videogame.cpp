@@ -1,20 +1,17 @@
 #include <Windows.h>
+#include "ContextManager.h"
+
 
 //Cabeceras y librerias DirectX
 #include <d3d11.h>
-#include <d3dx11.h>
-
-#ifdef NDEBUG
-#pragma comment(lib,"d3dx11.lib")
-#else
-#pragma comment(lib,"d3dx11d.lib")
-#endif
 
 #pragma comment(lib,"d3d11.lib")
-#pragma comment(lib,"dxerr.lib")
-#pragma comment(lib,"dxguid.lib")
+#pragma comment(lib,"Graphics_d.lib")
 
 #define APPLICATION_NAME	"VIDEOGAME_TEST"
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 
 //-----------------------------------------------------------------------------
@@ -55,7 +52,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 **  Para ello vamos a definir la "cadena de intercambio", o sea, cómo se va a         **
 **  comportar nuestro programa cada "frame"                                           **
 ***************************************************************************************/
-
+/*
 HRESULT CreateContext(HWND hWnd, int WIDTH_APPLICATION, int HEIGHT_APPLICATION){
 
 	// Tendremos que crear y rellenar una estructura de este tipo
@@ -70,10 +67,10 @@ HRESULT CreateContext(HWND hWnd, int WIDTH_APPLICATION, int HEIGHT_APPLICATION){
 	// TODO:
 	desc.BufferDesc.Width = WIDTH_APPLICATION;
 	desc.BufferDesc.Height = HEIGHT_APPLICATION;
-	desc.BufferDesc.RefreshRate.Numerator = 0;
-	desc.BufferDesc.RefreshRate.Denominator = 1;
+	desc.BufferDesc.RefreshRate.Numerator = 1;
+	desc.BufferDesc.RefreshRate.Denominator = 60;
 	desc.OutputWindow = hWnd;
-	//desc.SampleDesc.Count;
+	desc.SampleDesc.Count = 1;
 	//desc.SampleDesc.Quality;
 	//desc. ????
 
@@ -81,20 +78,23 @@ HRESULT CreateContext(HWND hWnd, int WIDTH_APPLICATION, int HEIGHT_APPLICATION){
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
 		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_10_0
 	};
 	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
 
+	
 
-	ID3D11Device *l_D3DDevice; // esta clase, el device, nos sirve para crear objetos de DirectX
-	ID3D11DeviceContext *l_DeviceContext; // el contexto nos va a servir para usar objetos de DirectX
-	IDXGISwapChain *l_SwapChain; // la cadena de swap
+	ID3D11Device *l_D3DDevice = NULL; // esta clase, el device, nos sirve para crear objetos de DirectX
+	ID3D11DeviceContext *l_DeviceContext = NULL; // el contexto nos va a servir para usar objetos de DirectX
+	IDXGISwapChain *l_SwapChain = NULL; // la cadena de swap
 
 	if (FAILED(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, featureLevels, numFeatureLevels, D3D11_SDK_VERSION, &desc, &l_SwapChain, &l_D3DDevice, NULL, &l_DeviceContext)))
 	{
 		return S_FALSE;
 	}
-	return 0;
-}
+	return S_OK;
+}*/
 
 //-----------------------------------------------------------------------
 // WinMain
@@ -108,20 +108,23 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
   // Create the application's window
   //W & Height tiene en cuenta la barra superior
-  HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL );
+  HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, wc.hInstance, NULL );
 
   // TODO Crear el contexto DIRECTX
-  CreateContext( hWnd, 800, 600);
+  //CreateContext( hWnd, 800, 600);
+  CContextManager *context = new CContextManager();
+  context->InitDevice(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT);
 
   // Añadir aquí el Init de la applicacioón
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );
+  context->CreateRenderTargetView();
   UpdateWindow( hWnd );
   MSG msg;
   ZeroMemory( &msg, sizeof(msg) );
 
   // Añadir en el while la condición de salida del programa de la aplicación
-
+  
   while( msg.message != WM_QUIT )
   {
     if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -133,7 +136,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     {
        // Main loop: Añadir aquí el Update y Render de la aplicación principal
 		//Update();
-		//Render();
+		context->Render();
     }
   }
   UnregisterClass( APPLICATION_NAME, wc.hInstance );
