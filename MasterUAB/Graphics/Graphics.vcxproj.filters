@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="ContextManager.cpp" />
+    <ClCompile Include="C:\Users\lsellart\Google Drive\UNI\Master\C++\TPAI\shaderCode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContextManager.h" />

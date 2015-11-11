@@ -89,6 +89,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C:\Users\lsellart\Google Drive\UNI\Master\C++\TPAI\motor3d.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Enemies\BossEnemy.cpp" />
     <ClCompile Include="Enemies\EnemyManager.cpp" />
     <ClCompile Include="Enemies\FixedEnemy.cpp" />

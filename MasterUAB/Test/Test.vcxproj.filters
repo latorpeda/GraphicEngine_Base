@@ -34,6 +34,7 @@
     <ClCompile Include="Enemies\PatrolEnemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\lsellart\Google Drive\UNI\Master\C++\TPAI\motor3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemies">
