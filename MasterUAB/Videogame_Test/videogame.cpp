@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include "ContextManager.h"
+#include "DebugRender.h"
+#include "Application.h"
 
 
 //Cabeceras y librerias DirectX
@@ -7,6 +9,7 @@
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"Graphics_d.lib")
+#pragma comment(lib,"Winmm.lib")
 
 #define APPLICATION_NAME	"VIDEOGAME_TEST"
 
@@ -110,21 +113,26 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   //W & Height tiene en cuenta la barra superior
   HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, wc.hInstance, NULL );
 
-  // TODO Crear el contexto DIRECTX
-  //CreateContext( hWnd, 800, 600);
-  CContextManager *context = new CContextManager();
-  context->InitDevice(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-  // Añadir aquí el Init de la applicacioón
+  CContextManager context;
+  context.CreateContext(hWnd, WINDOW_WIDTH,WINDOW_HEIGHT);
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );
-  context->CreateRenderTargetView();
+  
+  context.CreateBackBuffer(hWnd, WINDOW_WIDTH,WINDOW_HEIGHT);
+  context.InitStates();
+  CDebugRender debugRender(context.GetDevice());
+
+  CApplication application(&debugRender, &context);
+
   UpdateWindow( hWnd );
   MSG msg;
   ZeroMemory( &msg, sizeof(msg) );
 
   // Añadir en el while la condición de salida del programa de la aplicación
-  
+  DWORD _PreviousTime = 0;
+  DWORD _CurrentTime = 0;
+  float _ElapsedTime = 0; 
+
   while( msg.message != WM_QUIT )
   {
     if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
@@ -135,8 +143,13 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     else
     {
        // Main loop: Añadir aquí el Update y Render de la aplicación principal
-		//Update();
-		context->Render();
+		
+		_CurrentTime = timeGetTime();
+		_ElapsedTime = (float)(_CurrentTime - _PreviousTime)*0.001f;
+		_PreviousTime = _CurrentTime;
+
+		application.Update(_ElapsedTime);
+		application.Render();
     }
   }
   UnregisterClass( APPLICATION_NAME, wc.hInstance );

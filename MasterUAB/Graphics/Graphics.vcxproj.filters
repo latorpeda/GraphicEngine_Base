@@ -1,10 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ContextManager.cpp" />
     <ClCompile Include="C:\Users\lsellart\Google Drive\UNI\Master\C++\TPAI\shaderCode.cpp" />
+    <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="DebugRender.cpp" />
+    <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="SphericalCameraController.cpp" />
+    <ClCompile Include="ContextManager MAL.cpp" />
+    <ClCompile Include="ContextManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraController.h" />
+    <ClInclude Include="DebugRender.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="Frustum.h" />
+    <ClInclude Include="RenderableVertexs.h" />
+    <ClInclude Include="SphericalCameraController.h" />
+    <ClInclude Include="VertexTypes.h" />
+    <ClInclude Include="ContextManager MAL.h" />
     <ClInclude Include="ContextManager.h" />
   </ItemGroup>
 </Project>

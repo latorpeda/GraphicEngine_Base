@@ -14,10 +14,28 @@
     <ClCompile Include="C:\Users\lsellart\Google Drive\UNI\Master\C++\TPAI\shaderCode.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="ContextManager.cpp" />
+    <ClCompile Include="ContextManager MAL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DebugRender.cpp" />
+    <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="SphericalCameraController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="ContextManager.h" />
+    <ClInclude Include="ContextManager MAL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="DebugRender.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="Frustum.h" />
+    <ClInclude Include="RenderableVertexs.h" />
+    <ClInclude Include="SphericalCameraController.h" />
+    <ClInclude Include="VertexTypes.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{31F7443F-B43C-4D38-931C-FAC7C771EF91}</ProjectGuid>
