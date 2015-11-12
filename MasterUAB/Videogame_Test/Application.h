@@ -1,4 +1,5 @@
 #pragma once
+#include "SphericalCameraController.h"
 
 
 class CDebugRender;
@@ -18,6 +19,8 @@ private:
 	
 	CDebugRender *m_DebugRender;
 	CContextManager *m_ContextManager;
+	CSphericalCameraController m_camera;
+
 
 
 	float m_WorldRotation;

@@ -4,9 +4,6 @@
     <ClInclude Include="XML\XMLTreeNode.h">
       <Filter>XML</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Types.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -36,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="Math\Vector4.h">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Types.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

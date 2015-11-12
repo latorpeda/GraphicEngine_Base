@@ -11,6 +11,9 @@ class CContextManager
 {
 public:
 
+	int m_Width;
+	int m_Height;
+
 	enum ERasterizedState
 	{
 		RS_WIREFRAME,
@@ -22,6 +25,9 @@ public:
 public:
 	CContextManager();
 	~CContextManager();
+
+	int GetWith() { return m_Width; }
+	int GetHeight() { return m_Height; }
 
 	LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -42,6 +48,8 @@ public:
 	void SetCamera(const Mat44f& _View, const Mat44f& _Projection) { m_Parameters.m_View = _View; m_Parameters.m_Projection = _Projection; }
 	void SetCamera(const CCamera& _Camera) { m_Parameters.m_View = _Camera.GetView(); m_Parameters.m_Projection = _Camera.GetProjection(); }
 	void SetDebugSize(float _Size) { m_Parameters.m_DebugRenderScale = _Size; }
+	void Resize(HWND hWnd, unsigned int Width, unsigned int Height);
+	float GetAspectRatio() const { return (float)m_Width/(float)m_Height; }
 
 private:
 

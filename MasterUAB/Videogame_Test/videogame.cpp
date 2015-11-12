@@ -2,13 +2,16 @@
 #include "ContextManager.h"
 #include "DebugRender.h"
 #include "Application.h"
+#include "InputManager.h"
+#include "InputManagerImplementation.h"
 
 
 //Cabeceras y librerias DirectX
 #include <d3d11.h>
 
 #pragma comment(lib,"d3d11.lib")
-#pragma comment(lib,"Graphics_d.lib")
+
+#pragma comment(lib,"Core_d.lib")
 #pragma comment(lib,"Winmm.lib")
 
 #define APPLICATION_NAME	"VIDEOGAME_TEST"
@@ -16,6 +19,9 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+CContextManager context;
+CInputManager inputManager;
+CInputManagerImplementation inputManagerImp;
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()
@@ -26,24 +32,22 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 
   switch( msg )
   {
+  case WM_SIZE:
+	  {
+	  if (wParam != SIZE_MINIMIZED)
+		{
+			context.Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+		}
+		return 0;
+	  }
+	  break;
   case WM_DESTROY:
     {
       PostQuitMessage( 0 );
       return 0;
     }
     break;
-  case WM_KEYDOWN:
-    {
-      switch( wParam )
-      {
-      case VK_ESCAPE:
-        //Cleanup();
-        PostQuitMessage( 0 );
-        return 0;
-        break;
-      }
-    }
-    break;
+ 
   }//end switch( msg )
 
   //Si nosotros no tratamos un mensaje, lo redireccionamos a windows para q lo trate.
@@ -113,7 +117,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   //W & Height tiene en cuenta la barra superior
   HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, wc.hInstance, NULL );
 
-  CContextManager context;
+  
   context.CreateContext(hWnd, WINDOW_WIDTH,WINDOW_HEIGHT);
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );
@@ -123,6 +127,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   CDebugRender debugRender(context.GetDevice());
 
   CApplication application(&debugRender, &context);
+
+  //Input Manager
+  inputManager.SetCurrentInputManager(&inputManagerImp);
+  inputManagerImp.LoadCommandsFromFile("Data\\input.xml");
 
   UpdateWindow( hWnd );
   MSG msg;
@@ -136,20 +144,39 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   while( msg.message != WM_QUIT )
   {
     if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
-    {
-      TranslateMessage( &msg );
-      DispatchMessage( &msg );
+    {   
+		switch (msg.message)
+		{
+		case WM_SYSKEYDOWN:
+		case WM_SYSKEYUP:
+		case WM_KEYDOWN:
+		case WM_KEYUP:
+			if (!inputManagerImp.KeyEventReceived(msg.wParam, msg.lParam))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+			break;
+		default:
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
     }
     else
     {
        // Main loop: Añadir aquí el Update y Render de la aplicación principal
 		
+
 		_CurrentTime = timeGetTime();
 		_ElapsedTime = (float)(_CurrentTime - _PreviousTime)*0.001f;
 		_PreviousTime = _CurrentTime;
 
+		inputManagerImp.BeginFrame();
+
 		application.Update(_ElapsedTime);
 		application.Render();
+
+		inputManagerImp.EndFrame();
     }
   }
   UnregisterClass( APPLICATION_NAME, wc.hInstance );

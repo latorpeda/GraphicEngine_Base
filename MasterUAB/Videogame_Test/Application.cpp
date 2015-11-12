@@ -5,7 +5,8 @@
 
 #include "ContextManager.h"
 #include "DebugRender.h"
-
+//#include "CameraController.h"
+#include "InputManager.h"
 
 
 CApplication::CApplication(CDebugRender *_DebugRender, CContextManager *_ContextManager)
@@ -29,6 +30,29 @@ void CApplication::Update(float _ElapsedTime)
 	{
 		m_WorldRotation -= FLOAT_PI_VALUE * 2;
 	}
+
+	Vect3f cameraMovement(0,0,0);
+
+	if (CInputManager::GetInputManager()->IsActionActive("MOVE_LEFT"))
+	{
+		cameraMovement.x += 0.01f * _ElapsedTime;
+	}
+	if (CInputManager::GetInputManager()->IsActionActive("MOVE_RIGHT"))
+	{
+		cameraMovement.x -= 0.01f * _ElapsedTime;
+	}
+	if (CInputManager::GetInputManager()->IsActionActive("MOVE_UP"))
+	{
+		cameraMovement.y += 0.01f * _ElapsedTime;
+	}
+	if (CInputManager::GetInputManager()->IsActionActive("MOVE_DOWN"))
+	{
+		cameraMovement.y -= 0.01f * _ElapsedTime;
+	}
+
+	m_camera.Update(_ElapsedTime,cameraMovement);
+
+
 }
 
 void CApplication::Render()
@@ -37,7 +61,7 @@ void CApplication::Render()
 
 	CCamera camera;
 	camera.SetFOV(1.047f);
-	camera.SetAspectRatio(8.0f / 6.0f);
+	camera.SetAspectRatio(m_ContextManager->GetAspectRatio());
 	camera.SetZNear(0.1f);
 	camera.SetZFar(50.f);
 
