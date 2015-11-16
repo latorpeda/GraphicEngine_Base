@@ -93,7 +93,6 @@
     <ClCompile Include="Enemies\EnemyManager.cpp" />
     <ClCompile Include="Enemies\FixedEnemy.cpp" />
     <ClCompile Include="Enemies\PatrolEnemy.cpp" />
-    <ClCompile Include="H:\Motor3d\motor3d.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Test.cpp" />
   </ItemGroup>

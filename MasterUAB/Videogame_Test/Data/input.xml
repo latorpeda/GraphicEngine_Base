@@ -1,6 +1,6 @@
 <input>
-	<action name="MOVE_UP" type="KEYBOARD" mode="WHILE_PRESSED" key="W" />
-	<!--
-		Añadir el resto de acciones
-	-->
+	<action name="MOVE_FWD" type="KEYBOARD" mode="WHILE_PRESSED" key="W" />
+	<action name="MOVE_BACK" type="KEYBOARD" mode="WHILE_PRESSED" key="S" />
+	<action name="STRAFE_LEFT" type="KEYBOARD" mode="WHILE_PRESSED" key="A" />
+	<action name="STRAFE_RIGHT" type="KEYBOARD" mode="WHILE_PRESSED" key="D" />	
 </input>

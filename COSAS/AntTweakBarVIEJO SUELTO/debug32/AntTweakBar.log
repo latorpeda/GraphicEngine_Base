@@ -1,0 +1,226 @@
+﻿Compilación iniciada a las 16/11/2015 19:55:05.
+     1>Proyecto "D:\RepoMasterUABOK\MasterUAB\AntTweakBar\AntTweakBar.vcxproj" en el nodo 2 (build destinos).
+       El archivo del proyecto contiene ToolsVersion="12.0". Este conjunto de herramientas puede faltar o ser desconocido, en cuyo caso es posible que pueda resolver este problema instalando la versión apropiada de MSBuild, o puede haberse obligado a la compilación a utilizar un valor de ToolsVersion concreto por motivos de directivas. Se tratará el proyecto como si contuviera ToolsVersion="4.0". Para obtener más información, vea http://go.microsoft.com/fwlink/?LinkId=291333.
+     1>InitializeBuildStatus:
+         Aplicando tarea Touch a "debug32\AntTweakBar.unsuccessfulbuild".
+       PreBuildEvent:
+         fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectVS /Fh debug32\TwDirect3D11_LineRectVS.h TwDirect3D11.hlsl
+         fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectCstColorVS /Fh debug32\TwDirect3D11_LineRectCstColorVS.h TwDirect3D11.hlsl
+         fxc /Od /Zi /T ps_4_0_level_9_1 /E LineRectPS /Fh debug32\TwDirect3D11_LineRectPS.h TwDirect3D11.hlsl
+         fxc /Od /Zi /T vs_4_0_level_9_1 /E TextVS /Fh debug32\TwDirect3D11_TextVS.h TwDirect3D11.hlsl
+         fxc /Od /Zi /T vs_4_0_level_9_1 /E TextCstColorVS /Fh debug32\TwDirect3D11_TextCstColorVS.h TwDirect3D11.hlsl
+         fxc /Od /Zi /T ps_4_0_level_9_1 /E TextPS /Fh debug32\TwDirect3D11_TextPS.h TwDirect3D11.hlsl
+         
+         :VCEnd
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_LineRectVS.h
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_LineRectCstColorVS.h
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_LineRectPS.h
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_TextVS.h
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_TextCstColorVS.h
+         Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
+         Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
+         
+         compilation succeeded; see D:\RepoMasterUABOK\MasterUAB\AntTweakBar\debug32\TwDirect3D11_TextPS.h
+       ClCompile:
+         Todas las salidas están actualizadas.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ID:\RepoMasterUABOK\MasterUAB\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt TwBar.cpp TwDirect3D11.cpp TwMgr.cpp
+         TwBar.cpp
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(114): error C2653: 'CTwMgr' : no es un nombre de clase o espacio de nombres
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(114): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(114): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(114): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128): error C2146: error de sintaxis : falta ';' delante del identificador 'GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128): error C2433: 'CTwVarAtom::ERetType' : 'virtual' no se permite en las declaraciones de datos
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128): warning C4183: 'GetAttrib': falta el tipo de valor devuelto; se supone que se trata de una función miembro que devuelve 'int'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(131): error C2065: 'TW_TYPE_BUTTON' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(132): error C2065: 'TW_TYPE_BUTTON' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152): error C2146: error de sintaxis : falta ';' delante del identificador 'GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152): error C2433: 'CTwVarGroup::ERetType' : 'virtual' no se permite en las declaraciones de datos
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152): warning C4183: 'GetAttrib': falta el tipo de valor devuelto; se supone que se trata de una función miembro que devuelve 'int'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(174): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(174): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(174): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199): error C2146: error de sintaxis : falta ';' delante del identificador 'GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199): warning C4183: 'GetAttrib': falta el tipo de valor devuelto; se supone que se trata de una función miembro que devuelve 'int'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(321): error C2146: error de sintaxis : falta ';' delante del identificador 'm_ButtonAlign'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(321): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(321): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(337): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(337): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(338): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(338): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(339): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(339): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(340): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(340): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(426): error C2653: 'CTwMgr' : no es un nombre de clase o espacio de nombres
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(426): error C2065: 'CStructProxy' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(426): error C2059: error de sintaxis : ','
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(426): error C2976: 'std::map' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\map(80) : vea la declaración de 'std::map'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(428): error C2653: 'CTwMgr' : no es un nombre de clase o espacio de nombres
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(428): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(428): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(428): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(431): warning C4511: 'CTwBar' : no se pudo generar un constructor de copias
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(163) : vea la declaración de 'CTwBar'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.h(431): warning C4512: 'CTwBar' : no se pudo generar el operador de asignaciones
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(163) : vea la declaración de 'CTwBar'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1202): error C2039: 'GetAttrib' : no es un miembro de 'CTwVar'
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(28) : vea la declaración de 'CTwVar'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1203): error C2270: 'GetAttrib' : modificadores no permitidos en funciones que no sean miembro
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1210): error C2065: 'm_Label' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1213): error C2065: 'm_Help' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1220): error C2065: 'm_Visible' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1223): error C3861: 'IsReadOnly': no se encontró el identificador
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1655): error C2556: 'ERetType CTwVarAtom::GetAttrib(int,TwBar *,CTwVarGroup *,int,std::vector<_Ty> &,std::ostringstream &) const' : la función sobrecargada sólo se diferencia de 'int CTwVarAtom::GetAttrib(int,TwBar *,CTwVarGroup *,int,std::vector<_Ty> &,std::ostringstream &) const' por el tipo de valor devuelto
+                 with
+                 [
+                     _Ty=double
+                 ]
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128) : vea la declaración de 'CTwVarAtom::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1655): error C2371: 'CTwVarAtom::GetAttrib' : nueva definición; tipos básicos distintos
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(128) : vea la declaración de 'CTwVarAtom::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1817): error C2039: 'GetAttrib' : no es un miembro de 'CTwVar'
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(28) : vea la declaración de 'CTwVar'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(1817): error C2264: 'CTwVarAtom::GetAttrib' : error en la definición o declaración de función; no se ha llamado a la función
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2760): error C2556: 'ERetType CTwVarGroup::GetAttrib(int,TwBar *,CTwVarGroup *,int,std::vector<_Ty> &,std::ostringstream &) const' : la función sobrecargada sólo se diferencia de 'int CTwVarGroup::GetAttrib(int,TwBar *,CTwVarGroup *,int,std::vector<_Ty> &,std::ostringstream &) const' por el tipo de valor devuelto
+                 with
+                 [
+                     _Ty=double
+                 ]
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152) : vea la declaración de 'CTwVarGroup::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2760): error C2371: 'CTwVarGroup::GetAttrib' : nueva definición; tipos básicos distintos
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(152) : vea la declaración de 'CTwVarGroup::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2859): error C2039: 'GetAttrib' : no es un miembro de 'CTwVar'
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(28) : vea la declaración de 'CTwVar'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2859): error C2264: 'CTwVarGroup::GetAttrib' : error en la definición o declaración de función; no se ha llamado a la función
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2954): error C2758: 'CTwBar::CTexFont' : se debe inicializar en la lista de inicializadores de base/miembro de constructor
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(174) : vea la declaración de 'CTwBar::CTexFont'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2954): error C2512: 'std::map' : no hay disponible un constructor predeterminado adecuado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2987): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2995): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(2995): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3045): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3072): error C2065: 'm_CustomActiveStructProxy' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3626): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3631): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3636): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3657): error C2556: 'ERetType CTwBar::GetAttrib(int,std::vector<_Ty> &,std::ostringstream &) const' : la función sobrecargada sólo se diferencia de 'int CTwBar::GetAttrib(int,std::vector<_Ty> &,std::ostringstream &) const' por el tipo de valor devuelto
+                 with
+                 [
+                     _Ty=double
+                 ]
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199) : vea la declaración de 'CTwBar::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3657): error C2371: 'CTwBar::GetAttrib' : nueva definición; tipos básicos distintos
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(199) : vea la declaración de 'CTwBar::GetAttrib'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3746): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3748): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3994): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(3994): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4003): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4003): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4004): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4004): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4004): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4004): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4033): error C2065: '_GroupWidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4037): error C2065: '_GroupWidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4038): error C2065: 'm_ButtonAlign' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4039): error C2065: '_GroupWidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4039): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4039): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4041): error C2065: '_AtomWidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4046): error C2065: '_AtomWidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4053): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4053): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4058): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4058): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4065): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4065): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4074): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4074): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2065: '_WidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2065: '_WidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4090): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4184): error C2065: '_WidthMax' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4186): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4186): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4188): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4188): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4190): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4190): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4192): error C2065: 'm_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4192): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4197): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4197): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4204): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4204): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4218): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4218): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4223): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4223): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4224): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4224): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4224): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4224): error C2227: el operando izquierdo de '->m_CharHeight' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4245): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4245): error C2227: el operando izquierdo de '->m_CharWidth' debe señalar al tipo class/struct/union/generic
+                 el tipo es ''unknown-type''
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4255): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4255): error C2143: error de sintaxis : falta ',' delante de '*'
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4262): error C2065: '_Font' : identificador no declarado
+     1>d:\repomasteruabok\masteruab\anttweakbar\twbar.cpp(4262): fatal error C1003: el recuento de errores supera 100; se detiene la compilación
+         TwDirect3D11.cpp
+         TwMgr.cpp
+     1>d:\repomasteruabok\masteruab\anttweakbar\twmgr.cpp(4618): error C2039: 'GetAttrib' : no es un miembro de 'CTwVar'
+                 d:\repomasteruabok\masteruab\anttweakbar\twbar.h(28) : vea la declaración de 'CTwVar'
+         Generando código...
+     1>Compilación del proyecto terminada "D:\RepoMasterUABOK\MasterUAB\AntTweakBar\AntTweakBar.vcxproj" (build destinos) -- ERROR.
+
+ERROR al compilar.
+
+Tiempo transcurrido 00:00:01.15

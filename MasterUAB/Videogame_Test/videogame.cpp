@@ -1,191 +1,248 @@
 #include <Windows.h>
-#include "ContextManager.h"
-#include "DebugRender.h"
-#include "Application.h"
-#include "InputManager.h"
-#include "InputManagerImplementation.h"
+#include <Windowsx.h>
 
-
-//Cabeceras y librerias DirectX
 #include <d3d11.h>
 
-#pragma comment(lib,"d3d11.lib")
+#include <cassert>
+#include <AntTweakBar.h>
 
-#pragma comment(lib,"Core_d.lib")
-#pragma comment(lib,"Winmm.lib")
+#include "Math\Matrix44.h"
+#include "Math\Vector4.h"
 
-#define APPLICATION_NAME	"VIDEOGAME_TEST"
+#include "Application.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#include "InputManagerImplementation.h"
+#include "DebugHelperImplementation.h"
 
-CContextManager context;
-CInputManager inputManager;
-CInputManagerImplementation inputManagerImp;
+#include "ContextManager.h"
+#include "DebugRender.h"
+#include "Effect.h"
+#include "Camera.h"
+
+#pragma comment(lib, "Graphics_d.lib")
+#pragma comment(lib, "Winmm.lib")
+
+#define APPLICATION_NAME	"VIDEOGAME"
+
+CContextManager s_Context;
+
+void ToggleFullscreen(HWND Window, WINDOWPLACEMENT &WindowPosition)
+{
+	// This follows Raymond Chen's prescription
+	// for fullscreen toggling, see:
+	// http://blogs.msdn.com/b/oldnewthing/archive/2010/04/12/9994016.aspx
+
+	DWORD Style = GetWindowLongW(Window, GWL_STYLE);
+	if (Style & WS_OVERLAPPEDWINDOW)
+	{
+		MONITORINFO MonitorInfo = { sizeof(MonitorInfo) };
+		if (GetWindowPlacement(Window, &WindowPosition) &&
+			GetMonitorInfoW(MonitorFromWindow(Window, MONITOR_DEFAULTTOPRIMARY), &MonitorInfo))
+		{
+			SetWindowLongW(Window, GWL_STYLE, Style & ~WS_OVERLAPPEDWINDOW);
+			SetWindowPos(Window, HWND_TOP,
+				MonitorInfo.rcMonitor.left, MonitorInfo.rcMonitor.top,
+				MonitorInfo.rcMonitor.right - MonitorInfo.rcMonitor.left,
+				MonitorInfo.rcMonitor.bottom - MonitorInfo.rcMonitor.top,
+				SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+		}
+	}
+	else
+	{
+		SetWindowLongW(Window, GWL_STYLE, Style | WS_OVERLAPPEDWINDOW);
+		SetWindowPlacement(Window, &WindowPosition);
+		SetWindowPos(Window, 0, 0, 0, 0, 0,
+			SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
+			SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	}
+}
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()
 // Desc: The window's message handler
 //-----------------------------------------------------------------------------
-LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
+LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-
-  switch( msg )
-  {
-  case WM_SIZE:
-	  {
-	  if (wParam != SIZE_MINIMIZED)
+	switch (msg)
+	{
+	case WM_SIZE:
+		if (wParam != SIZE_MINIMIZED)
 		{
-			context.Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+			TwWindowSize(0, 0);
+			s_Context.Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+			TwWindowSize((UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
 		}
 		return 0;
-	  }
-	  break;
-  case WM_DESTROY:
-    {
-      PostQuitMessage( 0 );
-      return 0;
-    }
-    break;
- 
-  }//end switch( msg )
-
-  //Si nosotros no tratamos un mensaje, lo redireccionamos a windows para q lo trate.
-  return DefWindowProc( hWnd, msg, wParam, lParam );
-}
-
-/***************************************************************************************
-**  Para pintar en DirectX, primero necesitamos crear un contexto de DirectX.         **
-**  Para ello vamos a definir la "cadena de intercambio", o sea, cómo se va a         **
-**  comportar nuestro programa cada "frame"                                           **
-***************************************************************************************/
-/*
-HRESULT CreateContext(HWND hWnd, int WIDTH_APPLICATION, int HEIGHT_APPLICATION){
-
-	// Tendremos que crear y rellenar una estructura de este tipo
-	DXGI_SWAP_CHAIN_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
-	// o
-	//DXGI_SWAP_CHAIN_DESC desc = {};
-	desc.BufferCount = 1;
-	desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	desc.Windowed = TRUE;
-	// TODO:
-	desc.BufferDesc.Width = WIDTH_APPLICATION;
-	desc.BufferDesc.Height = HEIGHT_APPLICATION;
-	desc.BufferDesc.RefreshRate.Numerator = 1;
-	desc.BufferDesc.RefreshRate.Denominator = 60;
-	desc.OutputWindow = hWnd;
-	desc.SampleDesc.Count = 1;
-	//desc.SampleDesc.Quality;
-	//desc. ????
-
-	// Que DirectX queremos
-	D3D_FEATURE_LEVEL featureLevels[] =
+	case WM_DESTROY:
 	{
-		D3D_FEATURE_LEVEL_11_0,
-		D3D_FEATURE_LEVEL_10_1,
-		D3D_FEATURE_LEVEL_10_0
-	};
-	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
-
-	
-
-	ID3D11Device *l_D3DDevice = NULL; // esta clase, el device, nos sirve para crear objetos de DirectX
-	ID3D11DeviceContext *l_DeviceContext = NULL; // el contexto nos va a servir para usar objetos de DirectX
-	IDXGISwapChain *l_SwapChain = NULL; // la cadena de swap
-
-	if (FAILED(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, featureLevels, numFeatureLevels, D3D11_SDK_VERSION, &desc, &l_SwapChain, &l_D3DDevice, NULL, &l_DeviceContext)))
-	{
-		return S_FALSE;
+		PostQuitMessage(0);
+		return 0;
 	}
-	return S_OK;
-}*/
+	break;
+	}//end switch( msg )
+
+	return DefWindowProc(hWnd, msg, wParam, lParam);
+}
 
 //-----------------------------------------------------------------------
 // WinMain
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
-  // Register the window class
-  WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
+	// Register the window class
+	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
 
-  RegisterClassEx( &wc );
+	RegisterClassEx(&wc);
 
-  // Create the application's window
-  //W & Height tiene en cuenta la barra superior
-  HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, NULL, NULL, wc.hInstance, NULL );
 
-  
-  context.CreateContext(hWnd, WINDOW_WIDTH,WINDOW_HEIGHT);
+	// Calcular el tamano de nuestra ventana
+	RECT rc = {
+		0, 0, 800, 600
+	};
+	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-  ShowWindow( hWnd, SW_SHOWDEFAULT );
-  
-  context.CreateBackBuffer(hWnd, WINDOW_WIDTH,WINDOW_HEIGHT);
-  context.InitStates();
-  CDebugRender debugRender(context.GetDevice());
+	// Create the application's window
+	HWND hWnd = CreateWindow(APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, wc.hInstance, NULL);
 
-  CApplication application(&debugRender, &context);
+	// Añadir aquí el Init de la applicacioón
 
-  //Input Manager
-  inputManager.SetCurrentInputManager(&inputManagerImp);
-  inputManagerImp.LoadCommandsFromFile("Data\\input.xml");
+	s_Context.CreateContext(hWnd, 800, 600);
 
-  UpdateWindow( hWnd );
-  MSG msg;
-  ZeroMemory( &msg, sizeof(msg) );
+	ShowWindow(hWnd, SW_SHOWDEFAULT);
 
-  // Añadir en el while la condición de salida del programa de la aplicación
-  DWORD _PreviousTime = 0;
-  DWORD _CurrentTime = 0;
-  float _ElapsedTime = 0; 
+	s_Context.CreateBackBuffer(hWnd, 800, 600);
+	s_Context.InitStates();
+	{
+		CDebugRender debugRender(s_Context.GetDevice());
 
-  while( msg.message != WM_QUIT )
-  {
-    if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
-    {   
-		switch (msg.message)
+		CInputManagerImplementation inputManager(hWnd);
+		CInputManager::SetCurrentInputManager(&inputManager);
+
+		inputManager.LoadCommandsFromFile("Data\\input.xml");
+
+		CDebugHelperImplementation debugHelper(s_Context.GetDevice());
+		CDebugHelper::SetCurrentDebugHelper(&debugHelper);
+
+		CApplication application(&debugRender, &s_Context);
+
+		UpdateWindow(hWnd);
+		MSG msg;
+		ZeroMemory(&msg, sizeof(msg));
+
+		// Añadir en el while la condición de salida del programa de la aplicación
+		DWORD m_PreviousTime = timeGetTime();
+
+		bool hasFocus = true;
+
+		while (msg.message != WM_QUIT)
 		{
-		case WM_SYSKEYDOWN:
-		case WM_SYSKEYUP:
-		case WM_KEYDOWN:
-		case WM_KEYUP:
-			if (!inputManagerImp.KeyEventReceived(msg.wParam, msg.lParam))
+			if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
+				if (!debugHelper.Update(msg.hwnd, msg.message, msg.wParam, msg.lParam))
+				{
+					bool WasDown = false, IsDown = false, Alt = false;
+
+					switch (msg.message)
+					{
+					case WM_SETFOCUS:
+						hasFocus = true;
+						inputManager.SetFocus(true);
+						break;
+					case  WM_KILLFOCUS:
+						hasFocus = false;
+						inputManager.SetFocus(false);
+						break;
+					case WM_SYSKEYDOWN:
+					case WM_SYSKEYUP:
+					case WM_KEYDOWN:
+					case WM_KEYUP:
+						WasDown = ((msg.lParam & (1 << 30)) != 0);
+						IsDown = ((msg.lParam & (1 << 31)) == 0);
+						Alt = ((msg.lParam & (1 << 29)) != 0);
+
+						if (WasDown != IsDown)
+						{
+							if (IsDown)
+							{
+								bool consumed = false;
+								switch (msg.wParam)
+								{
+								case VK_RETURN:
+									if (Alt)
+									{
+										WINDOWPLACEMENT windowPosition = { sizeof(WINDOWPLACEMENT) };
+										GetWindowPlacement(msg.hwnd, &windowPosition);
+
+										ToggleFullscreen(msg.hwnd, windowPosition);
+										consumed = true;
+									}
+									break;
+								case VK_ESCAPE:
+									PostQuitMessage(0);
+									consumed = true;
+									break;
+								case VK_F4:
+									if (Alt)
+									{
+										PostQuitMessage(0);
+										consumed = true;
+									}
+									break;
+								}
+								if (consumed)
+								{
+									break;
+								}
+							}
+						}
+						if (!hasFocus || !inputManager.KeyEventReceived(msg.wParam, msg.lParam))
+						{
+							TranslateMessage(&msg);
+							DispatchMessage(&msg);
+						}
+						break;
+					case WM_MOUSEMOVE:
+						if (hasFocus)
+						{
+							int xPosAbsolute = GET_X_LPARAM(msg.lParam);
+							int yPosAbsolute = GET_Y_LPARAM(msg.lParam);
+
+							inputManager.UpdateCursor(xPosAbsolute, yPosAbsolute);
+						}
+						else
+						{
+							TranslateMessage(&msg);
+							DispatchMessage(&msg);
+						}
+						break;
+					default:
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+				}
 			}
-			break;
-		default:
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			else
+			{
+				inputManager.BeginFrame();
+
+				DWORD l_CurrentTime = timeGetTime();
+				float m_ElapsedTime = (float)(l_CurrentTime - m_PreviousTime)*0.001f;
+				m_PreviousTime = l_CurrentTime;
+
+
+				application.Update(m_ElapsedTime);
+				application.Render();
+
+
+				inputManager.EndFrame();
+			}
 		}
-    }
-    else
-    {
-       // Main loop: Añadir aquí el Update y Render de la aplicación principal
-		
+		UnregisterClass(APPLICATION_NAME, wc.hInstance);
+	}
+	// Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
+	s_Context.Dispose();
 
-		_CurrentTime = timeGetTime();
-		_ElapsedTime = (float)(_CurrentTime - _PreviousTime)*0.001f;
-		_PreviousTime = _CurrentTime;
-
-		inputManagerImp.BeginFrame();
-
-		application.Update(_ElapsedTime);
-		application.Render();
-
-		inputManagerImp.EndFrame();
-    }
-  }
-  UnregisterClass( APPLICATION_NAME, wc.hInstance );
-
-  // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
-
-  return 0;
+	return 0;
 }
-
-
 
 

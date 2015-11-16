@@ -50,14 +50,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="XML\Example.cpp">
-      <Filter>XML</Filter>
-    </ClCompile>
     <ClCompile Include="XML\XMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
     <ClCompile Include="Math\MathConstants.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\Example.cpp">
+      <Filter>XML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

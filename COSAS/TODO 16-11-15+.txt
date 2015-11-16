@@ -1,0 +1,15 @@
+TODO
+- Directx feature level 10 10_1....
+- vertexTypes dejar = 
+
+- TODO: Meter en 3rdParty
+- anttweakbar en code2, meter en 3rd party, añadir proyecto dentro d solucion, añadir paths y puede k mover dll??
+
+
+- mejorar estados render, en contextmanager todos funciones states, esconder triangulo de detras del cubo, 
+activar ztest con flags de initdepthstencil
+blendstate mezcla colores, 
+
+acabar inputmanager. todo + parsear xml
+
+dx.lib videogame test directorios vc++ bibliotecas path a sdk
